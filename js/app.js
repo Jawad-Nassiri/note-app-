@@ -7,7 +7,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const notesContainer = document.querySelector('.notes-container');
   const textarea = document.querySelector("textarea");
   const continueBtn = document.querySelector('.continue');
+  const noteElements = document.querySelectorAll('.note');
+  const colorBoxes = document.querySelectorAll('.color-box');
+  continueBtn.disabled = true;
+  let mainColor;
 
+ 
 
   addButton.addEventListener('click', showModal);
   closeButton.addEventListener('click', hideModal);
@@ -34,28 +39,43 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   })
 
-
-  notesContainer.addEventListener('click', function(evt) {
-    if(evt.target.classList.contains('delete')) {
-      evt.target.closest('article').remove();
-    }
+  
+  textarea.addEventListener('input', () => {
+    continueBtn.disabled = textarea.value.trim() === "";
   });
 
+
+  colorBoxes.forEach((colorBox) => {
+    colorBox.addEventListener('click', (evt) => {
+      //! way1
+      // colorBoxes.forEach(colorBox => colorBox.classList.remove('selected'));
+      // evt.target.classList.add('selected');
+
+      //! way2 (recommended)
+      document.querySelector('.selected').classList.remove('selected');
+      evt.target.classList.add('selected');
+
+      mainColor = evt.target.dataset.color;
+    })
+  });
 
 
   function showModal() {
     modalScreen.classList.remove('hidden');
   }
 
+
   function hideModal() {
     modalScreen.classList.add('hidden');
   }
+
 
   function addNote() {
     const note = textarea.value;
   
     const parentArticleElem = document.createElement("article");
     parentArticleElem.classList.add("note");
+    parentArticleElem.style.background = mainColor;
   
     const noteContentElem = document.createElement("p");
     noteContentElem.classList.add("note-content");
@@ -64,6 +84,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const trashParentDiv = document.createElement("div");
     const noteTrashElem = document.createElement("i");
     noteTrashElem.className = "fa-solid fa-trash delete";
+    trashParentDiv.addEventListener('click', (evt) => {
+      evt.target.closest('article').remove()
+    })
   
     trashParentDiv.append(noteTrashElem);
     parentArticleElem.append(noteContentElem);
@@ -72,5 +95,6 @@ document.addEventListener('DOMContentLoaded', () => {
     notesContainer.append(parentArticleElem);
     hideModal();
     textarea.value = "";
+
   }
 })

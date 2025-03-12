@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fa-IR" dir="rtl">
+<html>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,11 +15,11 @@
   </head>
   <body>
     <aside>
-      <header>
+      <!-- <header>
         <a href="https://sabzlearn.ir" target="_blank">
           <img src="./public/logo.webp" alt="Logo" class="w-16 rotate-90" />
         </a>
-      </header>
+      </header> -->
       <main>
         <button class="create-button">
           <svg
@@ -60,7 +60,7 @@
     <main class="container">
       <header>
         <div class="search-card">
-          <input type="text" placeholder="جستجو کنید ..." />
+          <input type="text" placeholder="Search" />
           <button>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -80,7 +80,7 @@
         </div>
       </header>
       <section class="content">
-        <h1>یادداشت ها</h1>
+        <h1>Notes</h1>
 
         <section class="notes-container">
           <!-- Data loaded from js -->
@@ -91,7 +91,7 @@
     <div class="modal-screen hidden">
       <article class="modal">
         <header>
-          <span>ایجاد یادداشت</span>
+          <span>Create a note</span>
           <button class="close-x-btn">X</button>
         </header>
         <main>
@@ -313,7 +313,7 @@
                   id="editor"
                   rows="8"
                   class="block w-full px-0 text-sm outline-none border-0 bg-zinc-800 focus:ring-0 text-white placeholder-zinc-400"
-                  placeholder="لطفا محتوای یادداشت را وارد نمائید ..."
+                  placeholder="Please enter your note ... "
                   required
                 ></textarea>
               </div>
@@ -321,44 +321,20 @@
           </form>
 
           <div>
-            <span class="colors-title"> انتخاب رنگ یادداشت: </span>
+            <span class="colors-title">Choose a color:</span>
             <div class="colors">
-              <div
-                data-color="#dc2626"
-                style="background: #dc2626"
-                class="color-box"
-              ></div>
-              <div
-                data-color="#ea580c"
-                style="background: #ea580c"
-                class="color-box"
-              ></div>
-              <div
-                data-color="#65a30d"
-                style="background: #65a30d"
-                class="color-box selected"
-              ></div>
-              <div
-                data-color="#059669"
-                style="background: #059669"
-                class="color-box"
-              ></div>
-              <div
-                data-color="#0d9488"
-                style="background: #0d9488"
-                class="color-box"
-              ></div>
-              <div
-                data-color="#0891b2"
-                style="background: #0891b2"
-                class="color-box"
-              ></div>
-            </div>
+              <div data-color="#dc2626" style="background: #dc2626" class="color-box"></div>
+              <div data-color="#ea580c" style="background: #ea580c" class="color-box"></div>
+              <div data-color="#65a30d" style="background: #65a30d" class="color-box"></div>
+              <div data-color="#059669" style="background: #059669" class="color-box"></div>
+              <div data-color="#0d9488" style="background: #0d9488" class="color-box"></div>
+              <div data-color="#0891b2" style="background: #0891b2" class="color-box selected"></div>
+            </div>            
           </div>
         </main>
         <footer>
-          <button class="close">انصراف</button>
-          <button class="continue">ایجاد یادداشت</button>
+          <button class="close">Cancel</button>
+          <button class="continue">Add Note</button>
         </footer>
       </article>
     </div>
