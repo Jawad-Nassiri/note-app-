@@ -9,6 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const continueBtn = document.querySelector('.continue');
   const noteElements = document.querySelectorAll('.note');
   const colorBoxes = document.querySelectorAll('.color-box');
+  const searchBtn = document.querySelector('.search-card > button');
+  const searchInput = document.querySelector('input[placeholder="Search"]');
+
   continueBtn.disabled = true;
   let mainColor;
 
@@ -18,6 +21,9 @@ document.addEventListener('DOMContentLoaded', () => {
   closeButton.addEventListener('click', hideModal);
   closeButtonX.addEventListener('click', hideModal);
   continueBtn.addEventListener('click', addNote);
+  textarea.addEventListener('input', toggleContinueBtnState);
+  searchInput.addEventListener('input', searchInNotes);
+  searchBtn.addEventListener('click', searchInNotes);
   
   document.addEventListener('keydown', (evt) => {
     if(evt.key === "Escape") {
@@ -31,18 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
       hideModal();
     }
   })
-
-
-  document.addEventListener('keydown', (evt) => {
-    if(evt.key === "Enter") {
-      addNote();
-    }
-  })
-
-  
-  textarea.addEventListener('input', () => {
-    continueBtn.disabled = textarea.value.trim() === "";
-  });
 
 
   colorBoxes.forEach((colorBox) => {
@@ -95,6 +89,27 @@ document.addEventListener('DOMContentLoaded', () => {
     notesContainer.append(parentArticleElem);
     hideModal();
     textarea.value = "";
+
+  }
+
+  function toggleContinueBtnState() {
+      continueBtn.disabled = textarea.value.trim() === "";
+  }
+
+
+  function searchInNotes() {
+    let searchValue = searchInput.value;
+    const noteElements = document.querySelectorAll('.note');
+
+    noteElements.forEach((noteElement) => {
+      const noteContent = noteElement.querySelector('.note-content');
+      
+      if(noteContent.textContent.includes(searchValue)) {
+        noteElement.style.display = 'flex';
+      } else {
+        noteElement.style.display = 'none';
+      }
+    })
 
   }
 })
